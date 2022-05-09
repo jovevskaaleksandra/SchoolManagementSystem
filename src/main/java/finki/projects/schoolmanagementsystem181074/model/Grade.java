@@ -3,27 +3,29 @@ package finki.projects.schoolmanagementsystem181074.model;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Entity
-@Table(name = "predmeti")
-public class Subject {
+public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull
-    private String name;
+    double value;
 
-    public Subject(){
+    public Grade() {
         super();
     }
 
-    public Subject(Integer id, String name) {
+    public Grade(Integer id, double value) {
         this.id = id;
-        this.name = name;
+        this.value = value;
     }
 
     public Integer getId() {
@@ -34,12 +36,12 @@ public class Subject {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public double getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(double value) {
+        this.value = value;
     }
+
 }
-
