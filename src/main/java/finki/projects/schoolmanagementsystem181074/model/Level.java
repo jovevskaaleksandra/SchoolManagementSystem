@@ -3,30 +3,30 @@ package finki.projects.schoolmanagementsystem181074.model;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "predmeti")
-public class Subject {
-
+public class Level {
     @Id
     private Integer id;
 
     @NotNull
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="subject")
-    private List<Teacher> teachers;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="level")
+    private List<Class> classes;
 
-    public Subject(){
-        super();
-    }
-
-    public Subject(Integer id, String name) {
+    public Level(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Level() {
     }
 
     public Integer getId() {
@@ -45,4 +45,3 @@ public class Subject {
         this.name = name;
     }
 }
-

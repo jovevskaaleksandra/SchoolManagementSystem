@@ -2,18 +2,17 @@ package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Student extends User{
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy="student")
+    private Registration registration;
 
     public Student() {
         super();

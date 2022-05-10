@@ -13,7 +13,6 @@ import javax.persistence.Id;
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull

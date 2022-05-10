@@ -3,21 +3,79 @@ package finki.projects.schoolmanagementsystem181074.model;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 public class Class {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull
     private String name;
 
+    @ManyToOne
+    private School school;
 
+    @ManyToOne
+    private Level level;
+
+    @ManyToOne
+    private SchoolYear schoolYear;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="c")
+    private List<Registration> registrations;
+
+    public Class() {
+    }
+
+    public Class(Integer id, String name, School school, Level level, SchoolYear schoolYear) {
+        this.id = id;
+        this.name = name;
+        this.school = school;
+        this.level = level;
+        this.schoolYear = schoolYear;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public SchoolYear getSchoolYear() {
+        return schoolYear;
+    }
+
+    public void setSchoolYear(SchoolYear schoolYear) {
+        this.schoolYear = schoolYear;
+    }
 }
