@@ -2,16 +2,19 @@ package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 public class Teacher extends User{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="teacher")
+    private List<Teaching> teachings;
+
 
     public Teacher() {
         super();

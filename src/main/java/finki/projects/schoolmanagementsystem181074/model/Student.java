@@ -3,6 +3,7 @@ package finki.projects.schoolmanagementsystem181074.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.Id;
 
 @Data
 @Entity

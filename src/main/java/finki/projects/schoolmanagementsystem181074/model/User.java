@@ -1,26 +1,28 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Collection;
 import java.util.Collections;
 
-@MappedSuperclass
-public class User{
+
+@Entity
+@Inheritance
+public abstract class User{
     @Id
     private Integer id;
 
-    @NotNull
+
     private String username;
 
-    @NotNull
+
     private String password;
 
-    @NotNull
+
     private String name;
 
     public User (){
@@ -65,4 +67,5 @@ public class User{
     public void setName(String name) {
         this.name = name;
     }
+
 }

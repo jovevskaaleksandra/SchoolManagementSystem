@@ -1,8 +1,7 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,7 +15,6 @@ public class Registration {
     @Id
     private Integer id;
 
-    @NotNull
     private Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
     @ManyToOne

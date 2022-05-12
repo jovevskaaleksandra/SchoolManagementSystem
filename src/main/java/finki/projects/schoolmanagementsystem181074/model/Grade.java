@@ -1,6 +1,5 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ public class Grade {
     @Id
     private Integer id;
 
-    @NotNull
     double value;
 
     public Grade() {

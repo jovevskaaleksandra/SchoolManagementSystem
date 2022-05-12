@@ -1,10 +1,11 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
-import com.sun.istack.NotNull;
+
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Id;
 
 @Data
 @Entity
@@ -13,7 +14,6 @@ public class Class {
     @Id
     private Integer id;
 
-    @NotNull
     private String name;
 
     @ManyToOne
