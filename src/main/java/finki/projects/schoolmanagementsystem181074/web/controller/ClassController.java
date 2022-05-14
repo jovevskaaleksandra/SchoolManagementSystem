@@ -1,6 +1,7 @@
 package finki.projects.schoolmanagementsystem181074.web.controller;
 
 import finki.projects.schoolmanagementsystem181074.repository.*;
+import finki.projects.schoolmanagementsystem181074.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,82 +11,77 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/class")
 public class ClassController {
 
-    @Autowired
-    private ClassRepository classRepository;
+    private final ClassService classService;
 
-    @Autowired
-    private SchoolYearRepository schoolYearRepository;
+    private final SchoolYearService schoolYearService;
 
-    @Autowired
-    private SchoolRepository schoolRepository;
+    private final SchoolService schoolService;
 
-    @Autowired
-    private LevelRepository levelRepository;
+    private final LevelService levelService;
 
-    @Autowired
-    private RegistrationRepository registrationRepository;
+    private final RegistrationService registrationService;
 
     @GetMapping("/dashboard")
     public String classIndex(Model model) {
         model.addAttribute("class", new Class());
-        model.addAttribute("classes", classRepository.findAll());
-        model.addAttribute("schools", schoolRepository.findAll());
-        model.addAttribute("levels", levelRepository.findAll());
-        model.addAttribute("schoolYears", schoolYearRepository.findAll());
+        model.addAttribute("classes", classService.findAll());
+        model.addAttribute("schools", schoolService.findAll());
+        model.addAttribute("levels", levelService.findAll());
+        model.addAttribute("schoolYears", schoolYearService.findAll());
         return "class/dashboard";
     }
 
     @GetMapping(path="/{id}")
     public String getClass (@PathVariable(value = "id") Integer id, Model model)
             throws ClassNotFoundException {
-        Class s = classRepository.findById(id)
+        Class s = classService.findById(id)
                 .orElseThrow(() -> new ClassNotFoundException());
         model.addAttribute("class", s);
-        model.addAttribute("registrations", registrationRepository.findByCId(id));
+        model.addAttribute("registrations", registrationService.findByCId(id));
         return "class/view";
     }
 
     @GetMapping(path="/all")
     public @ResponseBody
     Iterable<Class> getAllClasses() {
-        return classRepository.findAll();
+        return classService.findAll();
     }
 
     @GetMapping(path="/search")
     public String searchClass (@RequestParam(value = "search", required = false) String q, Model model)
             throws ClassNotFoundException {
-        Iterable<Class> classes = classRepository.findByNameContaining(q);
+        Iterable<Class> classes = classService.findByNameContaining(q);
         model.addAttribute("classes", classes);
         return "class/result";
     }
 
     @PostMapping("/create")
     public String createClass(@ModelAttribute Class s) {
-        classRepository.save(s);
+        classService.save(s);
         return "redirect:dashboard";
     }
 
     @GetMapping(path="/{id}/edit")
     public String viewUpdateFormClass(@PathVariable(value = "id") Integer id,
                                       Model model) throws ClassNotFoundException {
-        Class s = classRepository.findById(id)
+        Class s = classService.findById(id)
                 .orElseThrow(() -> new ClassNotFoundException());
         model.addAttribute("class", s);
-        model.addAttribute("schools", schoolRepository.findAll());
-        model.addAttribute("levels", levelRepository.findAll());
-        model.addAttribute("schoolYears", schoolYearRepository.findAll());
+        model.addAttribute("schools", schoolService.findAll());
+        model.addAttribute("levels", levelService.findAll());
+        model.addAttribute("schoolYears", schoolYearService.findAll());
         return "class/edit";
     }
 
     @PutMapping("/{id}/update")
     public String updateClass(@ModelAttribute Class s) {
-        classRepository.save(s);
+        classService.save(s);
         return "redirect:/class/dashboard";
     }
 
     @DeleteMapping("/delete")
     public String deleteClass(@ModelAttribute Class s) {
-        classRepository.delete(s);
+        classService.delete(s);
         return "redirect:dashboard";
     }
 }
