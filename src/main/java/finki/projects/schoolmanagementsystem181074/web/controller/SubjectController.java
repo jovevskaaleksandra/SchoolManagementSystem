@@ -13,6 +13,10 @@ public class SubjectController {
 
     private final SubjectService subjectService;
 
+    public SubjectController(SubjectService subjectService) {
+        this.subjectService = subjectService;
+    }
+
     @GetMapping("/dashboard")
     public String subjectIndex(Model model) {
         model.addAttribute("subject", new Subject());

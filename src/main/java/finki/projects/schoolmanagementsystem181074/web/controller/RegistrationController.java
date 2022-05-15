@@ -2,6 +2,7 @@ package finki.projects.schoolmanagementsystem181074.web.controller;
 
 import finki.projects.schoolmanagementsystem181074.model.Registration;
 import finki.projects.schoolmanagementsystem181074.model.exceptions.RegistrationNotFoundException;
+import finki.projects.schoolmanagementsystem181074.model.exceptions.StudentNotFoundException;
 import finki.projects.schoolmanagementsystem181074.service.ClassService;
 import finki.projects.schoolmanagementsystem181074.service.RegistrationService;
 import finki.projects.schoolmanagementsystem181074.service.StudentService;
@@ -18,6 +19,12 @@ public class RegistrationController {
     private final ClassService classService;
 
     private final StudentService studentService;
+
+    public RegistrationController(RegistrationService registrationService, ClassService classService, StudentService studentService) {
+        this.registrationService = registrationService;
+        this.classService = classService;
+        this.studentService = studentService;
+    }
 
     @GetMapping("/dashboard")
     public String registrationIndex(Model model) {
@@ -43,7 +50,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/create")
-    public String createRegistration(@ModelAttribute Registration s) {
+    public String createRegistration(@ModelAttribute Registration s) throws StudentNotFoundException, ClassNotFoundException {
         if(registrationService.findByStudentId(s.getStudent().getId()) != null)
             System.out.println("Student already has a class.");
         else
@@ -61,7 +68,7 @@ public class RegistrationController {
     }
 
     @PutMapping("/{id}/update")
-    public String updateRegistration(@ModelAttribute Registration s) {
+    public String updateRegistration(@ModelAttribute Registration s) throws StudentNotFoundException, ClassNotFoundException {
         registrationService.save(s);
         return "redirect:/registration/dashboard";
     }

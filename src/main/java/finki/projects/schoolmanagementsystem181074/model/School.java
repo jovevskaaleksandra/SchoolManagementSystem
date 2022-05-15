@@ -3,23 +3,21 @@ package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
 public class School {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="school")
-    private List<Class> classes;
+    private List<Class1> classes;
 
     public School() {
     }

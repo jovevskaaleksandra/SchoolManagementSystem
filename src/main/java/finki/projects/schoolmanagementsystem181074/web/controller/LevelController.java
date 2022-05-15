@@ -13,6 +13,10 @@ public class LevelController {
 
     private final LevelService levelService;
 
+    public LevelController(LevelService levelService) {
+        this.levelService = levelService;
+    }
+
     @GetMapping("/dashboard")
     public String levelIndex(Model model) {
         model.addAttribute("level", new Level());

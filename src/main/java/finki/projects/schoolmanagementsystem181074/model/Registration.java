@@ -1,11 +1,9 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.Data;
-import javax.persistence.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -13,12 +11,13 @@ import java.time.LocalDateTime;
 @Entity
 public class Registration {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
     @ManyToOne
-    private Class c;
+    private Class1 c;
 
     @OneToOne
     private Student student;
@@ -26,7 +25,7 @@ public class Registration {
     public Registration() {
     }
 
-    public Registration(Integer id, Timestamp timestamp, Class c, Student student) {
+    public Registration(Integer id, Timestamp timestamp, Class1 c, Student student) {
         this.id = id;
         this.timestamp = timestamp;
         this.c = c;
@@ -49,11 +48,11 @@ public class Registration {
         this.timestamp = timestamp;
     }
 
-    public Class getC() {
+    public Class1 getC() {
         return c;
     }
 
-    public void setC(Class c) {
+    public void setC(Class1 c) {
         this.c = c;
     }
 

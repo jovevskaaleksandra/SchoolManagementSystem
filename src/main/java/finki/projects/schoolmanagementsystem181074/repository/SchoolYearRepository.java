@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SchoolYearRepository extends JpaRepository<SchoolYear, Integer> {
 
     Iterable<SchoolYear> findFirst5ByOrderByIdDesc();
+
+    boolean findById(SchoolYear id);
 }

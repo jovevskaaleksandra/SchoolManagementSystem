@@ -13,6 +13,10 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
     @GetMapping("/dashboard")
     public String teacherIndex(Model model) {
         model.addAttribute("teacher", new Teacher());
@@ -58,4 +62,4 @@ public class TeacherController {
         teacherService.delete(s);
         return "redirect:dashboard";
     }
-}}
+}

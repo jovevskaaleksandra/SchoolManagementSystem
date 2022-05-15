@@ -13,6 +13,10 @@ public class GradeController {
 
     private final GradeService gradeService;
 
+    public GradeController(GradeService gradeService) {
+        this.gradeService = gradeService;
+    }
+
     @GetMapping("/dashboard")
     public String gradeIndex(Model model) {
         model.addAttribute("grade", new Grade());

@@ -2,6 +2,8 @@ package finki.projects.schoolmanagementsystem181074.web.controller;
 
 import finki.projects.schoolmanagementsystem181074.model.Registration;
 import finki.projects.schoolmanagementsystem181074.model.Student;
+import finki.projects.schoolmanagementsystem181074.model.exceptions.RegistrationNotFoundException;
+import finki.projects.schoolmanagementsystem181074.model.exceptions.SchoolNotFoundException;
 import finki.projects.schoolmanagementsystem181074.model.exceptions.StudentNotFoundException;
 import finki.projects.schoolmanagementsystem181074.service.GradeService;
 import finki.projects.schoolmanagementsystem181074.service.RegistrationService;
@@ -9,8 +11,6 @@ import finki.projects.schoolmanagementsystem181074.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping(path="/student")
@@ -21,6 +21,12 @@ public class StudentController {
     private final RegistrationService registrationService;
 
     private final GradeService gradeService;
+
+    public StudentController(StudentService studentService, RegistrationService registrationService, GradeService gradeService) {
+        this.studentService = studentService;
+        this.registrationService = registrationService;
+        this.gradeService = gradeService;
+    }
 
     @GetMapping("/dashboard")
     public String studentIndex(Model model) {
@@ -36,7 +42,7 @@ public class StudentController {
                 .orElseThrow(() -> new StudentNotFoundException());
         model.addAttribute("student", s);
         if(s != null) {
-            Registration r = registrationService.findByStudentId(s.getId());
+            Registration r = (Registration) registrationService.findByStudentId(s.getId());
             if(r != null) {
                 model.addAttribute("registration", r);
             }
@@ -59,7 +65,7 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public String createStudent(@ModelAttribute Student s) {
+    public String createStudent(@ModelAttribute Student s) throws RegistrationNotFoundException, SchoolNotFoundException {
         studentService.save(s);
         return "redirect:dashboard";
     }
@@ -74,7 +80,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}/update")
-    public String updateStudent(@ModelAttribute Student s) {
+    public String updateStudent(@ModelAttribute Student s) throws RegistrationNotFoundException, SchoolNotFoundException {
         studentService.save(s);
         return "redirect:/student/dashboard";
     }

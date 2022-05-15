@@ -12,6 +12,7 @@ import javax.persistence.Id;
 public class Grade {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     double value;

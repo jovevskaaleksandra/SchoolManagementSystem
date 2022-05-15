@@ -13,6 +13,10 @@ public class SchoolYearController {
 
     private final SchoolYearService schoolYearService;
 
+    public SchoolYearController(SchoolYearService schoolYearService) {
+        this.schoolYearService = schoolYearService;
+    }
+
     @GetMapping("/dashboard")
     public String schoolYearIndex(Model model) {
         model.addAttribute("schoolYear", new SchoolYear());
@@ -34,16 +38,16 @@ public class SchoolYearController {
         return schoolYearService.findAll();
     }
 
-    @PostMapping("/create")
+    /*@PostMapping("/create")
     public String createSchoolYear(@ModelAttribute SchoolYear s) {
         if(!schoolYearService.existsById(s.getId()))
             schoolYearService.save(s);
         return "redirect:dashboard";
-    }
+    }*/
 
     @DeleteMapping("/delete")
     public String deleteSchoolYear(@ModelAttribute SchoolYear s) {
         schoolYearService.delete(s);
         return "redirect:dashboard";
     }
-}}
+}

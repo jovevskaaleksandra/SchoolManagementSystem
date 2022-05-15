@@ -10,6 +10,7 @@ import javax.persistence.Id;
 public class Student extends User{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy="student")

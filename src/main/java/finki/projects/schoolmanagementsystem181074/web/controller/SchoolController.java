@@ -13,6 +13,10 @@ public class SchoolController {
 
     private final SchoolService schoolService;
 
+    public SchoolController(SchoolService schoolService) {
+        this.schoolService = schoolService;
+    }
+
     @GetMapping("/dashboard")
     public String schoolIndex(Model model) {
         model.addAttribute("school", new School());

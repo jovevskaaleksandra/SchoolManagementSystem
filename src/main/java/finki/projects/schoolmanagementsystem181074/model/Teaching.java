@@ -8,11 +8,11 @@ import javax.persistence.*;
 @Entity
 public class Teaching {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    private Class c;
+    private Class1 c;
 
     @ManyToOne
     private Subject subject;
@@ -24,7 +24,7 @@ public class Teaching {
         super();
     }
 
-    public Teaching(Integer id, Class c, Subject subject, Teacher teacher) {
+    public Teaching(Integer id, Class1 c, Subject subject, Teacher teacher) {
         super();
         this.id = id;
         this.c = c;
@@ -40,11 +40,11 @@ public class Teaching {
         this.id = id;
     }
 
-    public Class getC() {
+    public Class1 getC() {
         return c;
     }
 
-    public void setC(Class c) {
+    public void setC(Class1 c) {
         this.c = c;
     }
 

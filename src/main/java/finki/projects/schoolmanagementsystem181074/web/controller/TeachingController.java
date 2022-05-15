@@ -1,6 +1,8 @@
 package finki.projects.schoolmanagementsystem181074.web.controller;
 
 import finki.projects.schoolmanagementsystem181074.model.Teaching;
+import finki.projects.schoolmanagementsystem181074.model.exceptions.SubjectNotFoundException;
+import finki.projects.schoolmanagementsystem181074.model.exceptions.TeacherNotFoundException;
 import finki.projects.schoolmanagementsystem181074.model.exceptions.TeachingNotFoundException;
 import finki.projects.schoolmanagementsystem181074.service.ClassService;
 import finki.projects.schoolmanagementsystem181074.service.SubjectService;
@@ -21,6 +23,13 @@ public class TeachingController {
     private final TeacherService teacherService;
 
     private final ClassService classService;
+
+    public TeachingController(TeachingService teachingService, SubjectService subjectService, TeacherService teacherService, ClassService classService) {
+        this.teachingService = teachingService;
+        this.subjectService = subjectService;
+        this.teacherService = teacherService;
+        this.classService = classService;
+    }
 
     @GetMapping("/dashboard")
     public String teachingIndex(Model model) {
@@ -47,7 +56,7 @@ public class TeachingController {
     }
 
     @PostMapping("/create")
-    public String createTeaching(@ModelAttribute Teaching s) {
+    public String createTeaching(@ModelAttribute Teaching s) throws SubjectNotFoundException, TeacherNotFoundException, TeachingNotFoundException {
         teachingService.save(s);
         return "redirect:dashboard";
     }
@@ -64,7 +73,7 @@ public class TeachingController {
     }
 
     @PutMapping("/{id}/update")
-    public String updateTeaching(@ModelAttribute Teaching s) {
+    public String updateTeaching(@ModelAttribute Teaching s) throws SubjectNotFoundException, TeacherNotFoundException, TeachingNotFoundException {
         teachingService.save(s);
         return "redirect:/teaching/dashboard";
     }
@@ -74,4 +83,4 @@ public class TeachingController {
         teachingService.delete(s);
         return "redirect:dashboard";
     }
-}}
+}

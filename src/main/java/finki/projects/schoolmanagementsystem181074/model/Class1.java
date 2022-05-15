@@ -9,9 +9,10 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class Class {
+public class Class1 {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -28,10 +29,10 @@ public class Class {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="c")
     private List<Registration> registrations;
 
-    public Class() {
+    public Class1() {
     }
 
-    public Class(Integer id, String name, School school, Level level, SchoolYear schoolYear) {
+    public Class1(Integer id, String name, School school, Level level, SchoolYear schoolYear) {
         this.id = id;
         this.name = name;
         this.school = school;
