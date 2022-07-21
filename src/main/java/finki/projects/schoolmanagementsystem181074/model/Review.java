@@ -5,17 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Student {
+public class Review {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
-
-    private String surname;
-
-
-
-
+    //koj student
+    //koi oceni
 }

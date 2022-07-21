@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Student {
+public class Course {
 
     @Id
     @GeneratedValue
@@ -13,9 +13,7 @@ public class Student {
 
     private String name;
 
-    private String surname;
+    private String description;
 
-
-
-
+    private Integer credits;
 }
