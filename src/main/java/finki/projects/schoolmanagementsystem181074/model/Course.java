@@ -1,9 +1,12 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
 @Entity
 public class Course {
 
@@ -15,5 +18,9 @@ public class Course {
 
     private String description;
 
-    private Integer credits;
+    private Double credits;
+
+    private Boolean isEvenSemester;
+
+
 }
