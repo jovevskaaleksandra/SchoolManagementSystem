@@ -2,12 +2,12 @@ package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "course")
 public class Course {
 
     @Id
@@ -22,5 +22,6 @@ public class Course {
 
     private Boolean isEvenSemester;
 
-
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Set<Student> students;
 }
