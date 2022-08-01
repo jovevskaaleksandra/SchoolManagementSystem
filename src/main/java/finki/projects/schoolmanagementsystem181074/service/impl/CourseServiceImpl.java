@@ -23,23 +23,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Optional<Course> findCourseByName(String name) {
-        return this.courseRepository.findByName(name);
-    }
-
-    //to be implemented
-    @Override
-    public Optional<Course> saveCourse(String name, String description, Double credits, Boolean isEvenSemester) {
-        return null;
-    }
-    //to be implemented
-    @Override
-    public Optional<Course> editCourse(Long id, String name, String description, Double credits, Boolean isEvenSemester) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<Course> listAllCourses(Long courseId) {
+    public List<Course> listAllCourses() {
         return this.courseRepository.findAll();
     }
     //to be implemented
@@ -53,8 +37,5 @@ public class CourseServiceImpl implements CourseService {
         this.courseRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteCourseByName(String name) {
-        this.courseRepository.deleteByName(name);
-    }
+
 }

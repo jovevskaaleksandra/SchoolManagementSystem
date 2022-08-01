@@ -9,18 +9,10 @@ import java.util.Optional;
 public interface CourseService {
     Optional<Course> findCourseById(Long id);
 
-    Optional<Course> findCourseByName(String name);
-
-    Optional<Course> saveCourse(String name, String description, Double credits, Boolean isEvenSemester);
-
-    Optional<Course> editCourse(Long id, String name, String description, Double credits, Boolean isEvenSemester);
-
-    List<Course> listAllCourses(Long courseId);
+    List<Course> listAllCourses();
 
     Course addCourse (String name, String description, Double credits, Boolean isEvenSemester);
 
     void deleteCourseById(Long id);
-
-    void deleteCourseByName(String name);
 
 }
