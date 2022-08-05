@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System - 181074</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div><br>
+    <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+</div>
+<div>
+<a href="/course/add-course-form" class="btn btn-dark" style="margin-left: 30px">Add new course</a>
+</div><br>
+<h3 style="margin-left: 30px">Courses</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Name:</th>
+        <th>Description:</th>
+        <th>Credits:</th>
+        <th>Is course from even semester:</th>
+        <th>Enroll student:</th>
+        <th>Options:</th>
+    </tr>
+    <tr th:each="course: ${courses}">
+        <td th:text="${course.getName()}">[course.name]</td>
+        <td th:text="${course.getDescription()}">[course.description]</td>
+        <td th:text="${course.getCredits()}">[course.creedits]</td>
+        <td th:text="${course.getIsEvenSemester()}">[course.isEvenSemester]</td>
+        <td>nothing yet</td>
+        <td th:block>
+                <form th:action="@{'/course/{id}/delete' (id=${course.getId()})}" th:method="DELETE">
+                <button type="submit" class="btn btn-secondary">Delete course</button>
+            </form>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

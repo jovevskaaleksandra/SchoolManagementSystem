@@ -1,13 +1,16 @@
 package finki.projects.schoolmanagementsystem181074.web;
 
+import finki.projects.schoolmanagementsystem181074.exceptions.CourseAlreadyExists;
+import finki.projects.schoolmanagementsystem181074.exceptions.CourseNotFoundException;
 import finki.projects.schoolmanagementsystem181074.model.Course;
+import finki.projects.schoolmanagementsystem181074.model.Student;
 import finki.projects.schoolmanagementsystem181074.service.CourseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/course")
@@ -23,10 +26,29 @@ public class CourseController {
     public String findAll(Model model){
         List<Course> courses = this.courseService.listAllCourses();
         model.addAttribute("courses", courses);
-        return "master-template";
+        return "courses.html";
     }
 
-//
+    @GetMapping("/add-course-form")
+    public String showAdd(Model model){
+        List<Course> courses = this.courseService.listAllCourses();
+        model.addAttribute("courses", courses);
+        return "add-course.html";
+    }
+
+    @PostMapping
+    public String create(Course course) throws CourseAlreadyExists {
+        this.courseService.addCourse(course);
+        return "redirect:/course";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) throws CourseNotFoundException {
+        this.courseService.deleteCourseById(id);
+        return "redirect:/course";
+    }
+
+//isEvenSemester
 //    private final CourseService courseService;
 //
 //    @Autowired
@@ -48,14 +70,14 @@ public class CourseController {
 //    {
 //        //model.addAttribute("courses",co)
 ////        ModelAndView modelAndView = new ModelAndView();
-////        modelAndView.setViewName("master-template.html");
+////        modelAndView.setViewName("courses.html");
 ////          return modelAndView;
 //        return "master-template";
 //    }
 //    @RequestMapping("/all")
 //    public ModelAndView all(){
 //        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("master-template.html");
+//        modelAndView.setViewName("courses.html");
 //          return modelAndView;
 //    }
 
