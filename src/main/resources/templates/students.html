@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System - 181074</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div><br>
+    <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+</div>
+<div>
+<a href="/student/add-student-form" class="btn btn-dark" style="margin-left: 30px">Add new student</a>
+</div><br>
+<h3 style="margin-left: 30px">Students</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Index:</th>
+        <th>Name:</th>
+        <th>Surname:</th>
+        <th>Enrolled in courses:</th>
+        <th>Options:</th>
+    </tr>
+    <tr th:each="student: ${students}">
+        <td th:text="${student.getIndex()}">[student.index]</td>
+        <td th:text="${student.getName()}">[student.name]</td>
+        <td th:text="${student.getSurname()}">[student.surname]</td>
+        <td>courses</td>
+        <td th:block>
+                <form th:action="@{'/student/{id}/delete' (id=${student.getId()})}" th:method="DELETE">
+                <button type="submit" class="btn btn-secondary">Delete student</button>
+            </form>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

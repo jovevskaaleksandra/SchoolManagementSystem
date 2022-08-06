@@ -26,14 +26,14 @@ public class CourseController {
     public String findAll(Model model){
         List<Course> courses = this.courseService.listAllCourses();
         model.addAttribute("courses", courses);
-        return "courses.html";
+        return "courses";
     }
 
     @GetMapping("/add-course-form")
     public String showAdd(Model model){
         List<Course> courses = this.courseService.listAllCourses();
         model.addAttribute("courses", courses);
-        return "add-course.html";
+        return "add-course";
     }
 
     @PostMapping
