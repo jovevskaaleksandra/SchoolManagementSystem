@@ -18,6 +18,6 @@ public interface CourseService {
 
     void deleteCourseById(Long id) throws CourseNotFoundException;
 
-    //void addStudentToCourse(Long id, Student student);
+    void addStudentToCourse(Long courseId, Long studentId) throws CourseNotFoundException;
 
 }

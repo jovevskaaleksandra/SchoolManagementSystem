@@ -30,7 +30,11 @@
         <td th:text="${course.getDescription()}">[course.description]</td>
         <td th:text="${course.getCredits()}">[course.creedits]</td>
         <td th:text="${course.getIsEvenSemester()}">[course.isEvenSemester]</td>
-        <td>nothing yet</td>
+        <td th:block>
+        <form th:action="@{'course/add-student-to-course-form'}" th:method="GET">
+            <button type="submit" class="btn btn-secondary">Add student to course</button>
+        </form>
+        </td>
         <td th:block>
                 <form th:action="@{'/course/{id}/delete' (id=${course.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete course</button>

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,5 +24,8 @@ public class Teacher {
     private String surname;
 
     private String email;
+
+    @OneToMany(mappedBy = "teacher",cascade = CascadeType.PERSIST)
+    private List<Course> courses;
 
 }

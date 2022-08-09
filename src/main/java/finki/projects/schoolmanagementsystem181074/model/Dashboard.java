@@ -10,12 +10,14 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="report_cards")
-public class ReportCard {
+@Table(name="dashboards")
+public class Dashboard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @OneToOne(mappedBy = "dashboard",cascade = CascadeType.PERSIST)
+    private Student student;
 
 }

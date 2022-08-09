@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 
@@ -34,5 +33,7 @@ public class Student {
     @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
     private Set<Course> courses;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Dashboard dashboard;
 
 }

@@ -2,6 +2,7 @@ package finki.projects.schoolmanagementsystem181074.service.impl;
 
 import finki.projects.schoolmanagementsystem181074.exceptions.CourseAlreadyExists;
 import finki.projects.schoolmanagementsystem181074.exceptions.CourseNotFoundException;
+import finki.projects.schoolmanagementsystem181074.exceptions.StudentNotFoundException;
 import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Student;
 import finki.projects.schoolmanagementsystem181074.repository.CourseRepository;
@@ -56,12 +57,14 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.delete(course.get());
     }
 
-    //@Override
-    //public void addStudentToCourse(Long id, Student student) {
-        //student = studentRepository.getById(id);
-        //List<Course> courses = this.courseRepository;
-
-    //}
+    @Override
+    public void addStudentToCourse(Long courseId, Long studentId) throws CourseNotFoundException {
+        Course course = this.findCourseById(courseId);
+        List<Student> students= course.getStudents();
+        students.add(studentRepository.getById(studentId));
+        course.setStudents(students);
+        courseRepository.save(course);
+    }
 
 
 }

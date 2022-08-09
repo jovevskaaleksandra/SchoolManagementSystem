@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -28,5 +29,9 @@ public class Course {
     private Boolean isEvenSemester;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private Set<Student> students;
+    private List<Student> students;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Teacher teacher;
+
 }

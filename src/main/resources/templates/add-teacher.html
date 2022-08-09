@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System - 181074</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div><br>
+    <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+</div>
+<form method="POST" action="/teacher" class="card w-25" style="margin-left: 750px">
+    <p class="font-italic">Add information about the new teacher you are adding:</p>
+    <div>
+        <label class="font-weight-bold" for="name">Name</label>
+        <input  class="form-control" type="text"
+        id="name"
+        th:value="${teacher?.getName()}"
+        name="name"
+        required>
+    </div>
+    <div>
+        <label class="font-weight-bold" for="surname">Surname</label>
+        <input class="form-control" type="text"
+               id="surname"
+               th:value="${teacher?.getSurname()}"
+               name="surname"
+               required>
+    </div>
+    <div>
+        <label class="font-weight-bold" for="email">Email</label>
+        <input class="form-control" type="email"
+               id="email"
+               th:value="${teacher?.getEmail()}"
+               name="email"
+               required>
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-secondary">Submit</button>
+</form>
+</body>
+</html>
