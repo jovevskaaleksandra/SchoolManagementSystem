@@ -15,6 +15,14 @@
 <form method="POST" action="/teacher" class="card w-25" style="margin-left: 750px">
     <p class="font-italic">Add information about the new teacher you are adding:</p>
     <div>
+        <label class="font-weight-bold" for="code">Code</label>
+        <input  class="form-control" type="text"
+                id="code"
+                th:value="${teacher?.getCode()}"
+                name="code"
+                required>
+    </div>
+    <div>
         <label class="font-weight-bold" for="name">Name</label>
         <input  class="form-control" type="text"
         id="name"

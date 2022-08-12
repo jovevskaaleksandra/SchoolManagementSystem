@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -34,4 +33,20 @@ public class Course {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Teacher teacher;
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", credits=" + credits +
+                ", isEvenSemester=" + isEvenSemester +
+                ", students=" + students +
+                ", teacher=" + teacher.getId()+
+                '}';
+    }
 }

@@ -12,7 +12,7 @@
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
 </div>
-<form method="POST" action="/course" class="card w-25" style="margin-left: 750px">
+<form method="POST" action="" th:action="@{/course}" th:object="${course}" class="card w-25" style="margin-left: 750px">
     <p class="font-italic">Add information about the new course you are creating:</p>
     <div>
         <label class="font-weight-bold" for="name">Name</label>
@@ -47,6 +47,15 @@
                name="isEvenSemester"
                required>
     </div>
+    <div>
+        <label class="font-weight-bold" for="credits">Teacher</label>
+        <select th:field="*{teacher}" id="teachers" name="teachers" class="form-control">
+            <option th:each="teacher: ${teachers}"
+                    th:value="${teacher?.getId()}"
+                    th:text="${teacher?.getName()}">
+            </option>
+        </select>
+    </div><br>
     <button id="submit" type="submit" class="btn btn-secondary">Submit</button>
 </form>
 </body>

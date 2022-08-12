@@ -49,9 +49,9 @@ public class StudentController {
     //filter by index da se napravi
 
 
-    @PostMapping("/{index}/delete")
-    public String delete(@PathVariable String index) throws StudentNotFoundException {
-        this.studentService.deleteStudentByIndex(index);
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) throws StudentNotFoundException {
+        this.studentService.deleteStudentById(id);
         return "redirect:/student";
     }
 }

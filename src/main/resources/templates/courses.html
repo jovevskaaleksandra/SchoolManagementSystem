@@ -18,23 +18,21 @@
 <h3 style="margin-left: 30px">Courses</h3>
 <table class="table table-striped">
     <tr>
+        <th>Id of Course:</th>
         <th>Name:</th>
         <th>Description:</th>
         <th>Credits:</th>
         <th>Is course from even semester:</th>
-        <th>Enroll student:</th>
+        <th>Enrolled teacher:</th>
         <th>Options:</th>
     </tr>
     <tr th:each="course: ${courses}">
+        <td th:text="${course.getId()}">course.id</td>
         <td th:text="${course.getName()}">[course.name]</td>
         <td th:text="${course.getDescription()}">[course.description]</td>
-        <td th:text="${course.getCredits()}">[course.creedits]</td>
+        <td th:text="${course.getCredits()}">[course.credits]</td>
         <td th:text="${course.getIsEvenSemester()}">[course.isEvenSemester]</td>
-        <td th:block>
-        <form th:action="@{'course/add-student-to-course-form'}" th:method="GET">
-            <button type="submit" class="btn btn-secondary">Add student to course</button>
-        </form>
-        </td>
+        <td th:text="${course?.getTeacher().getName()}">[course.teacher]</td>
         <td th:block>
                 <form th:action="@{'/course/{id}/delete' (id=${course.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete course</button>

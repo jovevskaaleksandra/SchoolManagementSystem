@@ -56,8 +56,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void deleteStudentByIndex(String index) throws StudentNotFoundException {
-        Optional <Student> student = studentRepository.findByIndex(index);
+    public void deleteStudentById(Long id) throws StudentNotFoundException {
+        Optional <Student> student = studentRepository.findById(id);
         if(student.isEmpty()){
             throw new StudentNotFoundException("Student not found");
         }

@@ -18,5 +18,5 @@ public interface StudentService {
 
     Student findStudentByIndex(String index) throws StudentDoesNotExistException;
 
-    void deleteStudentByIndex(String index) throws StudentNotFoundException;
+    void deleteStudentById(Long id) throws StudentNotFoundException;
 }

@@ -18,12 +18,16 @@
 <h3 style="margin-left: 30px">Teachers</h3>
 <table class="table table-striped">
     <tr>
+        <th>Id of teacher:</th>
+        <th>Code:</th>
         <th>Name:</th>
         <th>Surname:</th>
         <th>Email</th>
         <th>Options:</th>
     </tr>
     <tr th:each="teacher: ${teachers}">
+        <td th:text="${teacher.getId()}">[teacher.id]</td>
+        <td th:text="${teacher.getCode()}">[teacher.code]</td>
         <td th:text="${teacher.getName()}">[teacher.name]</td>
         <td th:text="${teacher.getSurname()}">[teacher.surname]</td>
         <td th:text="${teacher.getEmail()}">[teacher.email]</td>

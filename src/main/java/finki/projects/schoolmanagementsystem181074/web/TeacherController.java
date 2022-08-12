@@ -2,6 +2,7 @@ package finki.projects.schoolmanagementsystem181074.web;
 
 import finki.projects.schoolmanagementsystem181074.exceptions.TeacherAlreadyExistsException;
 import finki.projects.schoolmanagementsystem181074.exceptions.TeacherNotFoundException;
+import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Teacher;
 import finki.projects.schoolmanagementsystem181074.service.TeacherService;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class TeacherController {
 
     @PostMapping
     public String create(Teacher teacher) throws TeacherAlreadyExistsException{
-        this.teacherService.create(teacher);
+        this.teacherService.createTeacher(teacher);
         return "redirect:/teacher";
     }
 
@@ -48,4 +49,5 @@ public class TeacherController {
         this.teacherService.deleteTeacherById(id);
         return "redirect:/teacher";
     }
+
 }

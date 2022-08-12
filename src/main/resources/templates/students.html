@@ -18,17 +18,23 @@
 <h3 style="margin-left: 30px">Students</h3>
 <table class="table table-striped">
     <tr>
+        <th>Id of Student:</th>
         <th>Index:</th>
         <th>Name:</th>
         <th>Surname:</th>
-        <th>Enrolled in courses:</th>
+        <th>Enroll in course:</th>
         <th>Options:</th>
     </tr>
     <tr th:each="student: ${students}">
+        <td th:text="${student.getId()}">[student.id]</td>
         <td th:text="${student.getIndex()}">[student.index]</td>
         <td th:text="${student.getName()}">[student.name]</td>
         <td th:text="${student.getSurname()}">[student.surname]</td>
-        <td>courses</td>
+        <td th:block>
+            <form th:action="@{'course/add-teacher-to-course-form'}" th:method="GET">
+                <button type="submit" class="btn btn-secondary">Add to course</button>
+            </form>
+        </td>
         <td th:block>
                 <form th:action="@{'/student/{id}/delete' (id=${student.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete student</button>

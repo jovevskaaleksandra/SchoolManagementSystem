@@ -2,7 +2,9 @@ package finki.projects.schoolmanagementsystem181074.service.impl;
 
 import finki.projects.schoolmanagementsystem181074.exceptions.TeacherAlreadyExistsException;
 import finki.projects.schoolmanagementsystem181074.exceptions.TeacherNotFoundException;
+import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Teacher;
+import finki.projects.schoolmanagementsystem181074.repository.CourseRepository;
 import finki.projects.schoolmanagementsystem181074.repository.TeacherRepository;
 import finki.projects.schoolmanagementsystem181074.service.TeacherService;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,16 @@ import java.util.Optional;
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
 
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
+        this.courseRepository = courseRepository;
     }
 
     @Override
-    public Teacher create(Teacher teacher) throws TeacherAlreadyExistsException {
-        Optional<Teacher> existingTeacher = teacherRepository.findById(teacher.getId());
+    public Teacher createTeacher(Teacher teacher) throws TeacherAlreadyExistsException {
+        Optional<Teacher> existingTeacher = teacherRepository.findByCode(teacher.getCode());
         if(existingTeacher.isPresent()){
             throw new TeacherAlreadyExistsException("Teacher already exists");
         }
@@ -50,4 +54,6 @@ public class TeacherServiceImpl implements TeacherService {
         }
         teacherRepository.delete(teacher.get());
     }
+
+
 }
