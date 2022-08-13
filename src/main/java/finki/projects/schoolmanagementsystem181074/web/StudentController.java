@@ -1,18 +1,16 @@
 package finki.projects.schoolmanagementsystem181074.web;
 
-import finki.projects.schoolmanagementsystem181074.exceptions.CourseAlreadyExists;
 import finki.projects.schoolmanagementsystem181074.exceptions.CourseNotFoundException;
 import finki.projects.schoolmanagementsystem181074.exceptions.StudentAlreadyExistsException;
+import finki.projects.schoolmanagementsystem181074.exceptions.StudentAlreadyInCourseException;
 import finki.projects.schoolmanagementsystem181074.exceptions.StudentNotFoundException;
 import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Student;
+import finki.projects.schoolmanagementsystem181074.service.CourseService;
 import finki.projects.schoolmanagementsystem181074.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +19,16 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    private final CourseService courseService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, CourseService courseService) {
         this.studentService = studentService;
+        this.courseService = courseService;
+    }
+
+    @ModelAttribute("student")
+    public Student student(Student studentById){
+            return new Student();
     }
 
     @GetMapping
@@ -40,13 +45,28 @@ public class StudentController {
         return "add-student";
     }
 
+    @GetMapping("/add-{id}-to-course-form")
+    public String showAddStudentToCourse(@PathVariable Long id, Model model) throws StudentNotFoundException {
+        List<Course> courses = this.courseService.listAllCourses();
+        model.addAttribute("courses", courses);
+        Student student = this.studentService.findStudentById(id);
+        model.addAttribute("student", student);
+        return "add-student-to-course";
+    }
+
     @PostMapping
     public String create(Student student) throws StudentAlreadyExistsException {
         this.studentService.create(student);
         return "redirect:/student";
     }
 
-    //filter by index da se napravi
+    @PostMapping("/{id}")
+    public String AddStudentToCourse (@ModelAttribute("student") @PathVariable Long id,@RequestParam List<Course> courses, Model model) throws StudentAlreadyInCourseException, CourseNotFoundException, StudentNotFoundException {
+        this.studentService.addStudentToCourse(id,courses);
+        model.addAttribute("courses", courses);
+        return "redirect:/student";
+    }
+
 
 
     @PostMapping("/{id}/delete")

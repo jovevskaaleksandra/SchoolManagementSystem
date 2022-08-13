@@ -1,8 +1,7 @@
 package finki.projects.schoolmanagementsystem181074.service;
 
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentAlreadyExistsException;
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentDoesNotExistException;
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentNotFoundException;
+import finki.projects.schoolmanagementsystem181074.exceptions.*;
+import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Student;
 
 import java.util.List;
@@ -19,4 +18,6 @@ public interface StudentService {
     Student findStudentByIndex(String index) throws StudentDoesNotExistException;
 
     void deleteStudentById(Long id) throws StudentNotFoundException;
+
+    void addStudentToCourse(Long studentId, List<Course> courses) throws StudentNotFoundException, CourseNotFoundException, StudentAlreadyInCourseException;
 }

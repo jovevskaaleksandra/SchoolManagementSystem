@@ -1,10 +1,11 @@
 package finki.projects.schoolmanagementsystem181074.service.impl;
 
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentAlreadyExistsException;
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentDoesNotExistException;
-import finki.projects.schoolmanagementsystem181074.exceptions.StudentNotFoundException;
+import finki.projects.schoolmanagementsystem181074.exceptions.*;
+import finki.projects.schoolmanagementsystem181074.model.Course;
 import finki.projects.schoolmanagementsystem181074.model.Student;
+import finki.projects.schoolmanagementsystem181074.repository.CourseRepository;
 import finki.projects.schoolmanagementsystem181074.repository.StudentRepository;
+import finki.projects.schoolmanagementsystem181074.service.CourseService;
 import finki.projects.schoolmanagementsystem181074.service.StudentService;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,13 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
+    private final CourseService courseService;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, CourseRepository courseRepository, CourseService courseService) {
         this.studentRepository = studentRepository;
+        this.courseRepository = courseRepository;
+        this.courseService = courseService;
     }
 
     @Override
@@ -62,5 +67,15 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentNotFoundException("Student not found");
         }
         studentRepository.delete(student.get());
+    }
+
+    @Override
+    public void addStudentToCourse(Long studentId, List <Course> courses) throws StudentNotFoundException, CourseNotFoundException, StudentAlreadyInCourseException {
+        Student newStudent = this.findStudentById(studentId);
+        if(newStudent.getCourses().size() > 0){
+            throw new StudentAlreadyInCourseException("Student is already added to this course");
+        }
+        newStudent.setCourses(courses);
+        this.studentRepository.save(newStudent);
     }
 }

@@ -48,7 +48,7 @@
                required>
     </div>
     <div>
-        <label class="font-weight-bold" for="credits">Teacher</label>
+        <label class="font-weight-bold" for="teachers">Teacher</label>
         <select th:field="*{teacher}" id="teachers" name="teachers" class="form-control">
             <option th:each="teacher: ${teachers}"
                     th:value="${teacher?.getId()}"

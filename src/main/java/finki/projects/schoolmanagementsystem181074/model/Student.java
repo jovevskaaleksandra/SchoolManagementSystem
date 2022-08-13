@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -31,9 +32,17 @@ public class Student {
     private String surname;
 
     @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
-    private Set<Course> courses;
+    private List<Course> courses;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Dashboard dashboard;
+
+    public List<String> getCoursesNames() {
+        List<String> names = new ArrayList<>();
+        for (Course course:courses) {
+            names.add(course.getName()+",");
+        }
+        return names;
+    }
 
 }

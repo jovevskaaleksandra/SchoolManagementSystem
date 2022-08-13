@@ -22,7 +22,7 @@
         <th>Index:</th>
         <th>Name:</th>
         <th>Surname:</th>
-        <th>Enroll in course:</th>
+        <th>Enrolled in course:</th>
         <th>Options:</th>
     </tr>
     <tr th:each="student: ${students}">
@@ -30,12 +30,13 @@
         <td th:text="${student.getIndex()}">[student.index]</td>
         <td th:text="${student.getName()}">[student.name]</td>
         <td th:text="${student.getSurname()}">[student.surname]</td>
-        <td th:block>
-            <form th:action="@{'course/add-teacher-to-course-form'}" th:method="GET">
-                <button type="submit" class="btn btn-secondary">Add to course</button>
-            </form>
+        <td th:text="${student.getCoursesNames()}">
+            zemi gi kursevite
         </td>
         <td th:block>
+                <form th:action="@{'/student/add-{id}-to-course-form' (id=${student.getId()})}" th:method="GET">
+                    <button type="submit" class="btn btn-secondary">Add to course</button>
+                </form><br>
                 <form th:action="@{'/student/{id}/delete' (id=${student.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete student</button>
             </form>
