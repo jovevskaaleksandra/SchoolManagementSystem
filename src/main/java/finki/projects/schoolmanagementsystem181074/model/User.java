@@ -1,6 +1,7 @@
 package finki.projects.schoolmanagementsystem181074.model;
 
 import finki.projects.schoolmanagementsystem181074.enumerations.Role;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import java.util.Collections;
 
 @Data
 @Entity
+@AllArgsConstructor
 @Table(name="users")
 public class User implements UserDetails {
 
@@ -30,6 +32,9 @@ public class User implements UserDetails {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Project project;
 
     public User() {
     }

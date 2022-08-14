@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System - 181074</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div><br>
+    <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+</div>
+<form method="POST" action="" th:action="@{/project}" th:object="${project}" class="card w-25" style="margin-left: 750px">
+    <p class="font-italic">Add information about the new project you are creating:</p>
+    <div>
+        <label class="font-weight-bold">Username</label>
+        <div></div>
+    </div>
+    <div>
+        <label class="font-weight-bold" for="title">Title</label>
+        <input  class="form-control" type= "text"
+               id="title"
+               th:value="${project?.getTitle()}"
+               name="title"
+               required>
+    </div>
+    <div>
+        <label class="font-weight-bold" for="description">Description</label>
+        <input class="form-control" type="text"
+               id="description"
+               th:value="${project?.getDescription()}"
+               name="description"
+               required>
+    </div>
+    <div>
+        <label class="font-weight-bold" for="teachers">Teacher</label>
+        <select th:field="*{teacher}" id="teachers" name="teachers" class="form-control">
+            <option th:each="teacher: ${teachers}"
+                    th:value="${teacher?.getId()}"
+                    th:text="${teacher?.getName()}">
+            </option>
+        </select>
+    </div><br>
+    <button id="submit" type="submit" class="btn btn-secondary">Submit</button>
+</form>
+</body>
+</html>

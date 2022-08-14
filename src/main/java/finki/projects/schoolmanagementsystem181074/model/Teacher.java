@@ -36,4 +36,8 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher",cascade = CascadeType.PERSIST)
     private List<Course> courses;
 
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.PERSIST)
+    private List<Project> projects;
+
+
 }

@@ -34,8 +34,6 @@ public class Student {
     @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
     private List<Course> courses;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Dashboard dashboard;
 
     public List<String> getCoursesNames() {
         List<String> names = new ArrayList<>();
