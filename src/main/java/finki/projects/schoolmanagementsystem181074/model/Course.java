@@ -25,8 +25,6 @@ public class Course {
 
     private Double credits;
 
-    private Boolean isEvenSemester;
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Student> students;
 
@@ -44,7 +42,6 @@ public class Course {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", credits=" + credits +
-                ", isEvenSemester=" + isEvenSemester +
                 ", students=" + students +
                 ", teacher=" + teacher.getId()+
                 '}';

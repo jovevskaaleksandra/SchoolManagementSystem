@@ -38,15 +38,6 @@
                name="credits"
                required>
     </div>
-
-    <div>
-        <label  class="font-weight-bold" for="isEvenSemester">Is this course from even semester</label>
-        <input type="checkbox"
-               id="isEvenSemester"
-               th:value="${course?.getIsEvenSemester()}"
-               name="isEvenSemester"
-               required>
-    </div>
     <div>
         <label class="font-weight-bold" for="teachers">Teacher</label>
         <select th:field="*{teacher}" id="teachers" name="teachers" class="form-control">
