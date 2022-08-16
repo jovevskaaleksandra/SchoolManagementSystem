@@ -3,6 +3,7 @@ package finki.projects.schoolmanagementsystem181074.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 
@@ -10,15 +11,12 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="diplomski")
+@Table(name="projects")
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue
     private Long id;
-
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String code;
 
     private String title;
 
@@ -29,4 +27,16 @@ public class Project {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private User user;
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", teacher=" + teacher.getId() +
+                ", user=" + user.getUsername() +
+                '}';
+    }
+
 }

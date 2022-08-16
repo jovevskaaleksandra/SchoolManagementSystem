@@ -33,9 +33,6 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Project project;
-
     public User() {
     }
 

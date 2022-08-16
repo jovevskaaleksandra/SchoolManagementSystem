@@ -1,8 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System - 181074</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div><br>
+    <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+</div>
 <div class="container">
     <h1 th:if="${hasError}" th:text="${error}"></h1>
 </div>
 <div class="container">
-    <form class="form-signin mt-xl-5" method="post" action="/register">
+    <form class="form-signin form-control-sm" method="post" action="/register">
         <h2 class="form-signin-heading">Register</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
@@ -42,7 +56,7 @@
             <label class="form-check-label" for="ROLE_STUDENT">ROLE_STUDENT</label>
         </div>
         </p>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <button class=" btn btn-dark btn-block" type="submit">Sign up</button>
     </form>
     <a href="/login" class="btn btn-block btn-light">Already have an account? Login here!</a>
 </div>

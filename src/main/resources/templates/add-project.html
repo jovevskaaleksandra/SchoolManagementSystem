@@ -16,7 +16,9 @@
     <p class="font-italic">Add information about the new project you are creating:</p>
     <div>
         <label class="font-weight-bold">Username</label>
-        <div></div>
+        <div th:field="*{user}" name="user"
+             th:value="${user.getUsername()}"
+             th:text="${user.getUsername()}"></div>
     </div>
     <div>
         <label class="font-weight-bold" for="title">Title</label>

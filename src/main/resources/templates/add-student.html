@@ -12,7 +12,7 @@
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
 </div>
-<form method="POST" action="/student" class="card w-25" style="margin-left: 750px">
+<form method="POST" action="" th:action="@{/student}" th:object="${student}" class="card w-25" style="margin-left: 750px">
     <p class="font-italic">Add information about the new student you are adding:</p>
     <div>
         <label class="font-weight-bold" for="index">Index</label>

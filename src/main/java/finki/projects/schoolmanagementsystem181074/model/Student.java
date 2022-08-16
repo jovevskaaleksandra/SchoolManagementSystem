@@ -31,7 +31,7 @@ public class Student {
     @Column(name = "students_surname", nullable = false)
     private String surname;
 
-    @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Course> courses;
 
 

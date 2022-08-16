@@ -7,7 +7,10 @@ import finki.projects.schoolmanagementsystem181074.service.AuthService;
 import finki.projects.schoolmanagementsystem181074.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/register")
@@ -26,8 +29,8 @@ public class RegisterController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        model.addAttribute("bodyContent","register");
-        return "home";
+        model.addAttribute("register","register");
+        return "register";
     }
 
     @PostMapping
@@ -39,7 +42,7 @@ public class RegisterController {
                            @RequestParam Role role) {
         try{
             this.userService.register(username, password, repeatedPassword, name, surname, role);
-            return "redirect:/login";
+            return "redirect:/";
         } catch (InvalidArgumentsException | PasswordsDoNotMatchException exception) {
             return "redirect:/register?error=" + exception.getMessage();
         }

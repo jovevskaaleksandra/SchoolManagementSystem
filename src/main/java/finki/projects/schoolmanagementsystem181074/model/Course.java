@@ -25,7 +25,7 @@ public class Course {
 
     private Double credits;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
     private List<Student> students;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
