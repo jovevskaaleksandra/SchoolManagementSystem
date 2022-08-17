@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
+import java.util.function.Supplier;
 
 @Data
 @Entity
@@ -15,7 +16,7 @@ import javax.persistence.*;
 public class Project {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String title;
@@ -34,8 +35,8 @@ public class Project {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", teacher=" + teacher.getId() +
-                ", user=" + user.getUsername() +
+                ", teacher=" + teacher +
+                ", user=" + user +
                 '}';
     }
 

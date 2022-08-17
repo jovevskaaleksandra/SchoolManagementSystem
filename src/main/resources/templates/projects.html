@@ -11,9 +11,10 @@
 <body>
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
-</div>
+</div><hr>
 <div>
-    <a href="/project/add-project-form" class="btn btn-dark" style="margin-left: 30px">Add your project</a>
+    <a href="/project/add-project-form" class="btn btn-dark" style="margin-left: 30px" th:block sec:authorize="hasRole('ROLE_STUDENT')">Add your project</a>
+    <a href="/" class="btn btn-warning" style="margin-left: 1650px;">Home</a>
 </div><br>
 <h3 style="margin-left: 30px">Projects</h3>
 <table class="table table-striped">
@@ -30,14 +31,13 @@
         <td th:text="${project.getUser()}">[project.user]</td>
         <td th:text="${project.getTitle()}">[project.surname]</td>
         <td th:text="${project.getDescription()}">[project.email]</td>
-        <td th:text="${project.getTeacher().getName()}">[project.email]</td>
-        <td th:block>
+        <td th:text="${project?.getTeacher().getName()}">[project.email]</td>
+        <td th:block  sec:authorize="hasRole('ROLE_TEACHER')">
                 <form th:action="@{'/project/{id}/delete' (id=${project.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete project</button>
             </form>
         </td>
-
     </tr>
-</table>
+</table><hr>
 </body>
 </html>

@@ -42,7 +42,6 @@ public class Course {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", credits=" + credits +
-                ", students=" + students +
                 ", teacher=" + teacher.getId()+
                 '}';
     }

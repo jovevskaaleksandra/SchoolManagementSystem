@@ -11,9 +11,11 @@
 <body>
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
+    <hr>
 </div>
 <div>
-<a href="/teacher/add-teacher-form" class="btn btn-dark" style="margin-left: 30px">Add new teacher</a>
+<a href="/teacher/add-teacher-form" class="btn btn-dark" style="margin-left: 30px" th:block sec:authorize="hasRole('ROLE_ADMIN')">Add new teacher</a>
+    <a href="/" class="btn btn-warning" style="margin-left: 1650px;">Home</a>
 </div><br>
 <h3 style="margin-left: 30px">Teachers</h3>
 <table class="table table-striped">
@@ -31,7 +33,7 @@
         <td th:text="${teacher.getName()}">[teacher.name]</td>
         <td th:text="${teacher.getSurname()}">[teacher.surname]</td>
         <td th:text="${teacher.getEmail()}">[teacher.email]</td>
-        <td th:block>
+        <td th:block sec:authorize="hasRole('ROLE_ADMIN')">
                 <form th:action="@{'/teacher/{id}/delete' (id=${teacher.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete teacher</button>
             </form>
@@ -39,5 +41,6 @@
 
     </tr>
 </table>
+<hr>
 </body>
 </html>

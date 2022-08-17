@@ -11,9 +11,10 @@
 <body>
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
-</div>
+</div><hr>
 <div>
-<a href="/student/add-student-form" class="btn btn-dark" style="margin-left: 30px">Add new student</a>
+<a href="/student/add-student-form" class="btn btn-dark" style="margin-left: 30px" th:block sec:authorize="hasRole('ROLE_ADMIN')">Add new student</a>
+    <a href="/" class="btn btn-warning" style="margin-left: 1650px;">Home</a>
 </div><br>
 <h3 style="margin-left: 30px">Students</h3>
 <table class="table table-striped">
@@ -33,7 +34,7 @@
         <td th:text="${student.getCoursesNames()}">
             zemi gi kursevite
         </td>
-        <td th:block>
+        <td th:block sec:authorize="hasAnyRole('ROLE_TEACHER','ROLE_ADMIN')">
                 <form th:action="@{'/student/add-{id}-to-course-form' (id=${student.getId()})}" th:method="GET">
                     <button type="submit" class="btn btn-secondary">Add to course</button>
                 </form><br>
@@ -43,6 +44,6 @@
         </td>
 
     </tr>
-</table>
+</table><hr>
 </body>
 </html>

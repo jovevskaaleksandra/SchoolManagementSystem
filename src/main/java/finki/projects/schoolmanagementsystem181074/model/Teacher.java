@@ -36,8 +36,16 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher",cascade = CascadeType.PERSIST)
     private List<Course> courses;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.PERSIST)
-    private List<Project> projects;
 
-
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", courses=" + courses +
+                '}';
+    }
 }

@@ -21,9 +21,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationProvider = authenticationProvider;
     }
     @Override
-    protected void configure(HttpSecurity security) throws Exception
+    protected void configure(HttpSecurity http) throws Exception
     {
-        security.httpBasic().disable();
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/","/register","/home").permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .failureUrl("/login?error=BadCredentials")
+                .defaultSuccessUrl("/", true)
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/access_denied");
+
     }
 
 }

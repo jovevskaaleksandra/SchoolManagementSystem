@@ -11,9 +11,10 @@
 <body>
 <div><br>
     <h2 style="text-align: center" class="text-light bg-dark">Student Management System</h2><br>
-</div>
+</div><hr>
 <div>
-<a href="/course/add-course-form" class="btn btn-dark" style="margin-left: 30px">Add new course</a>
+<a href="/course/add-course-form" class="btn btn-dark" style="margin-left: 30px" th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">Add new course</a>
+    <a href="/" class="btn btn-warning" style="margin-left: 1650px;">Home</a>
 </div><br>
 <h3 style="margin-left: 30px">Courses</h3>
 <table class="table table-striped">
@@ -31,13 +32,13 @@
         <td th:text="${course.getDescription()}">[course.description]</td>
         <td th:text="${course.getCredits()}">[course.credits]</td>
         <td th:text="${course?.getTeacher().getName()}">[course.teacher]</td>
-        <td th:block>
+        <td th:block  sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_TEACHER')">
                 <form th:action="@{'/course/{id}/delete' (id=${course.getId()})}" th:method="DELETE">
                 <button type="submit" class="btn btn-secondary">Delete course</button>
             </form>
         </td>
 
     </tr>
-</table>
+</table><hr>
 </body>
 </html>
