@@ -23,10 +23,10 @@ public class Project {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Teacher teacher;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
     @Override
@@ -35,8 +35,8 @@ public class Project {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", teacher=" + teacher +
-                ", user=" + user +
+                ", teacher=" + teacher.getId() +
+                ", user=" + user.getUsername() +
                 '}';
     }
 
