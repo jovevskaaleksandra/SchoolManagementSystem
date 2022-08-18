@@ -12,7 +12,6 @@ import java.util.Collections;
 
 @Data
 @Entity
-@AllArgsConstructor
 @Table(name="users")
 public class User implements UserDetails {
 

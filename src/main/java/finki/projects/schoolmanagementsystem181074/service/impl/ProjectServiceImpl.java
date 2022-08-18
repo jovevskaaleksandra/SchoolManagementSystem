@@ -21,7 +21,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project createProject(Project project) throws ProjectAlreadyExists {
-        Optional<Project> existingProject = this.projectRepository.findById(project.getId());
+        Optional<Project> existingProject = this.projectRepository.findByTitle(project.getTitle());
         if(existingProject.isPresent()){
             throw new ProjectAlreadyExists("Project already exists");
         }

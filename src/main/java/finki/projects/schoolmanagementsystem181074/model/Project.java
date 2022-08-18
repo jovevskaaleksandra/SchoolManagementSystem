@@ -2,7 +2,9 @@ package finki.projects.schoolmanagementsystem181074.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
@@ -23,10 +25,10 @@ public class Project {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Teacher teacher;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE)
     private User user;
 
     @Override
